@@ -22,9 +22,9 @@ class Board:
 			return player
 		elif (self.board[curr] == 1):
 			correctRange = (player == 0 and curr in range(6)) or (player == 1 and curr in range(7, 13))
-			if (correctRange):
+			opp = 12 - curr
+			if (correctRange and self.board[opp] != 0):
 				print("Player " + str(player) + " successfully stole some pieces!")
-				opp = 12 - curr
 				stole = self.board[opp]
 				self.board[opp] = 0
 				stole += self.board[curr]
@@ -59,11 +59,11 @@ class Board:
 		self.board[6] += total1
 		self.board[13] += total2
 		if (total1 > total2):
-			print("Player 0 Won! " + str(total1) + " to " + str(total2) + ".")
+			print("Player 0 Won! " + str(self.board[6]) + " to " + str(self.board[13]) + ".")
 		elif (total1 < total2):
-			print("Player 1 Won! " + str(total2) + " to " + str(total1) + ".")
+			print("Player 1 Won! " + str(self.board[13]) + " to " + str(self.board[6]) + ".")
 		else:
-			print("Tie! " + str(total2) + " to " + str(total1) + ".")
+			print("Tie! " + str(self.board[13]) + " to " + str(self.board[6]) + ".")
 
 
 	def getState(self):
